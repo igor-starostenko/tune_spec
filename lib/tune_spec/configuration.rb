@@ -20,6 +20,10 @@ module TuneSpec
       base.reset
     end
 
+    def configure
+      yield self
+    end
+
     def reset
       VALID_CONFIG_KEYS.each do |key|
         send("#{key}=", self::Configuration.const_get("DEFAULT_#{key}".upcase))
