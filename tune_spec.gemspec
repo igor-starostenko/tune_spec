@@ -1,24 +1,25 @@
-# coding: utf-8
-lib = File.expand_path("../lib", __FILE__)
+# frozen_string_literal: true
+
+lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "tune_spec/version"
+require 'tune_spec/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "tune_spec"
+  spec.name          = 'tune_spec'
   spec.version       = TuneSpec::VERSION
-  spec.authors       = ["Igor Starostenko"]
-  spec.email         = ["contactigorstar@gmail.com"]
+  spec.authors       = ['Igor Starostenko']
+  spec.email         = ['contactigorstar@gmail.com']
 
   spec.summary       = "tune_spec_#{TuneSpec::VERSION}"
   spec.description   = 'In Development. e2e Ruby tests in Page Objects'
-  spec.homepage      = "https://github.com/igor-starostenko/tune_spec"
-  spec.license       = "MIT"
+  spec.homepage      = 'https://github.com/igor-starostenko/tune_spec'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
-  spec.bindir        = "exe"
+  spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_development_dependency "bundler", "~> 1.15"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency 'bundler', '~> 1.15'
+  spec.add_development_dependency 'rubocop', '~> 0.50.0'
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'optparse'
 require 'fileutils'
 
@@ -18,7 +20,8 @@ module TuneSpec
       parser.parse!(original_args)
     end
 
-		def parser
+    # rubocop:disable MethodLength
+    def parser
       OptionParser.new do |parser|
         parser.summary_width = 34
 
@@ -27,9 +30,9 @@ module TuneSpec
         parser.on('--init [PATH]',
                   'Create framework folder structure') do |dir|
           base_path = dir || 'lib'
-          %w[groups pages steps].each do |dir|
+          %w[groups pages steps].each do |folder|
             FileUtils.mkdir_p(base_path)
-            path = "#{base_path}/#{dir}"
+            path = "#{base_path}/#{folder}"
             exists = directory_exists?(path)
             print_directory(path, exists)
             create_directory(path) unless exists
@@ -45,7 +48,7 @@ module TuneSpec
     end
 
     def create_directory(dir)
-      Dir.mkdir(dir) 
+      Dir.mkdir(dir)
     end
 
     def directory_exists?(dir)
