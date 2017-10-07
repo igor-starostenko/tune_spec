@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'tune_spec'
+require 'bundler/setup'
+require 'tune_spec/parser'
 
 TuneSpec::Parser.parse(ARGV)

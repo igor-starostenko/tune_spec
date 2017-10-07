@@ -1,4 +1,5 @@
 require 'optparse'
+require 'fileutils'
 
 module TuneSpec
   # @private
@@ -23,13 +24,32 @@ module TuneSpec
 
         parser.banner = "Usage: tune [options]\n\n"
 
-        parser.on('spec --init PATH',
+        parser.on('--init [PATH]',
                   'Create framework folder structure') do |dir|
           base_path = dir || 'lib'
-          Dir.mkdir(base_path)
-          %w[groups pages steps].each { |dir| Dir.mkdir("#{base_path}/#{dir} }
+          %w[groups pages steps].each do |dir|
+            FileUtils.mkdir_p(base_path)
+            path = "#{base_path}/#{dir}"
+            exists = directory_exists?(path)
+            print_directory(path, exists)
+            create_directory(path) unless exists
+          end
         end
       end
+    end
+
+    private
+
+    def print_directory(dir, exists)
+      puts "  #{exists ? :exist : :create}   #{dir}"
+    end
+
+    def create_directory(dir)
+      Dir.mkdir(dir) 
+    end
+
+    def directory_exists?(dir)
+      Dir.exist?(dir)
     end
   end
 end
