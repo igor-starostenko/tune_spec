@@ -21,7 +21,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To initialize framework folder structure run:
+
+    $ tune --init
 
 ## Development
 
