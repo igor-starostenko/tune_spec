@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tune_spec (0.1.0)
+    tune_spec (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -33,4 +33,4 @@ DEPENDENCIES
   tune_spec!
 
 BUNDLED WITH
-   1.15.4
+   1.16.0.pre.3
