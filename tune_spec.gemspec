@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["contactigorstar@gmail.com"]
 
   spec.summary       = "tune_spec_#{TuneSpec::VERSION}"
-  spec.description   = 'e2e Ruby tests in Page Objects'
+  spec.description   = 'In Development. e2e Ruby tests in Page Objects'
   spec.homepage      = "https://github.com/igor-starostenko/tune_spec"
   spec.license       = "MIT"
 
