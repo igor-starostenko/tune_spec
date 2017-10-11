@@ -13,7 +13,7 @@ module TuneSpec
 
     DEFAULT_GROUP_OPTS = {}.freeze
 
-    attr_accessor(*VALID_CONFIG_KEYS)
+    VALID_CONFIG_KEYS.each { |key| attr_accessor key }
 
     # Make sure the default values are set when the module is 'extended'
     def self.extended(base)
