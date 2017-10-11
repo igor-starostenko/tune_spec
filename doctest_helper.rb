@@ -4,17 +4,22 @@ require 'tune_spec'
 require 'fileutils'
 
 include TuneSpec::Instances
-TuneSpec.directory = 'test'
+TEST_ENV = 'STG'
+
+TuneSpec.configure do |conf|
+  conf.directory = 'test'
+  conf.group_opts = { env: TEST_ENV }
+end
 
 def create_file(name, type)
-  FileUtils.mkdir_p("test/#{type}")
-  File.open("test/#{type}/#{name}_#{type}.rb", 'w+') do |file|
+  FileUtils.mkdir_p("test/#{type}s")
+  File.open("test/#{type}s/#{name}_#{type}.rb", 'w+') do |file|
     file << file_content(name, type)
   end
 end
 
 def file_content(name, type)
-  <<~EOF
+  <<~FILE
     class_name = "#{name.capitalize}#{type.capitalize}"
     klass = Object.const_set(class_name, Class.new)
 
@@ -23,12 +28,12 @@ def file_content(name, type)
         puts "#{type} method called"
       end
     end
-  EOF
+  FILE
 end
 
 YARD::Doctest.configure do |doctest|
   doctest.before('TuneSpec::Instances') do
-    create_file(:login, :groups)
+    create_file(:login, :group)
   end
 
   doctest.after('TuneSpec::Instances') do
