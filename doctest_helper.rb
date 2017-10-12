@@ -24,9 +24,8 @@ def file_content(name, type)
     klass = Object.const_set(class_name, Class.new)
 
     klass.class_eval do
-      define_method('complete') do
-        puts "#{type} method called"
-      end
+      define_method('initialize') do |env|; end
+      define_method('complete') do; end
     end
   FILE
 end

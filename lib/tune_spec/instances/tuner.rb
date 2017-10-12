@@ -45,10 +45,9 @@ module TuneSpec
 
         def format_args(args, object_class)
           default_args = fetch_default_args
-          [].tap do |arr|
+          args.tap do |arr|
             default_args.each do |key, value|
-              next unless argument_required?(key, object_class)
-              arr << (args[key] || value) if arg_required?(key)
+              arr << value if argument_required?(key, object_class)
             end
           end
         end
