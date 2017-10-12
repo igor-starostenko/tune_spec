@@ -9,6 +9,7 @@ TEST_ENV = 'STG'
 TuneSpec.configure do |conf|
   conf.directory = 'test'
   conf.group_opts = { env: TEST_ENV }
+  conf.step_opts = { env: TEST_ENV }
   conf.page_opts = { env: TEST_ENV }
 end
 
@@ -25,20 +26,26 @@ def file_content(name, type)
     klass = Object.const_set(class_name, Class.new)
 
     klass.class_eval do
-      define_method('initialize') do |env|; end
-      define_method('complete') do; end
-      define_method('click_element') do; end
+      case "#{type}"
+      when 'group'
+        define_method('initialize') do |env|; end
+        define_method('complete') do; end
+      when 'step'
+        define_method('initialize') do |env, page_object|; end
+        define_method('verify_result') do; end
+      when 'page'
+        define_method('initialize') do |env|; end
+        define_method('click_element') do; end
+      end
     end
   FILE
 end
 
 YARD::Doctest.configure do |doctest|
-  doctest.before('TuneSpec::Instances#group') do
+  doctest.before('TuneSpec::Instances') do
     create_file(:login, :group)
-  end
-
-  doctest.before('TuneSpec::Instances#page') do
-    create_file(:login, :page)
+    create_file(:calculator, :step)
+    create_file(:home, :page)
   end
 
   doctest.after('TuneSpec::Instances') do
