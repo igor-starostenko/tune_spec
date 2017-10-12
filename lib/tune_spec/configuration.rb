@@ -3,13 +3,13 @@
 module TuneSpec
   # Defines all configurable attributes of TuneSpec
   module Configuration
-    VALID_CONFIG_KEYS = %i[directory page_opts step_opts group_opts].freeze
+    VALID_CONFIG_KEYS = %i[directory page_opts steps_opts group_opts].freeze
 
     DEFAULT_DIRECTORY = 'lib'
 
     DEFAULT_PAGE_OPTS = {}.freeze
 
-    DEFAULT_STEP_OPTS = {}.freeze
+    DEFAULT_STEPS_OPTS = {}.freeze
 
     DEFAULT_GROUP_OPTS = {}.freeze
 

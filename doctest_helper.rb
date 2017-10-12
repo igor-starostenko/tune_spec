@@ -9,7 +9,7 @@ TEST_ENV = 'STG'
 TuneSpec.configure do |conf|
   conf.directory = 'test'
   conf.group_opts = { env: TEST_ENV }
-  conf.step_opts = { env: TEST_ENV }
+  conf.steps_opts = { env: TEST_ENV }
   conf.page_opts = { env: TEST_ENV }
 end
 
@@ -30,7 +30,7 @@ def file_content(name, type)
       when 'group'
         define_method('initialize') do |env|; end
         define_method('complete') do; end
-      when 'step'
+      when 'steps'
         define_method('initialize') do |env, page_object|; end
         define_method('verify_result') do; end
       when 'page'
@@ -44,7 +44,7 @@ end
 YARD::Doctest.configure do |doctest|
   doctest.before('TuneSpec::Instances') do
     create_file(:login, :group)
-    create_file(:calculator, :step)
+    create_file(:calculator, :steps)
     create_file(:home, :page)
   end
 

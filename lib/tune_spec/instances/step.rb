@@ -5,13 +5,13 @@ require_relative 'tuner'
 module TuneSpec
   module Instances
     # Defines the steps behavior and rules
-    class Step < Tuner
+    class Steps < Tuner
       class << self
         private
 
         # Step specific args format
         def post_format_args(args)
-          args.tap { |arr| arr[1] = page(args[1][:page]) }
+          args.tap { |arr| arr[1] = pages(args[1][:page]) }
         end
 
         # Step specific rules

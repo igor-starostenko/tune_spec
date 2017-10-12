@@ -27,9 +27,9 @@ module TuneSpec
     # @param block [Block] that yields to self
     # @return [StepObject]
     # @example
-    #   step(:calculator, page: :home).verify_result
-    def step(name, *args, &block)
-      instance_handler(name, :step, *args, block)
+    #   steps(:calculator, page: :home).verify_result
+    def steps(name, *args, &block)
+      instance_handler(name, :steps, *args, block)
     end
 
     # Creates an instance of Page or calls an existing
@@ -39,8 +39,8 @@ module TuneSpec
     # @param block [Block] that yields to self
     # @return [PageObject]
     # @example
-    #   page(:home).click_element
-    def page(name, *args, &block)
+    #   pages(:home).click_element
+    def pages(name, *args, &block)
       instance_handler(name, :page, *args, block)
     end
 
