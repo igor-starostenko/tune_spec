@@ -1,5 +1,4 @@
 # TuneSpec
-# #In Development#
 
 Organizes large scale integration tests following Convention over Configuration paradigm.
 
@@ -24,6 +23,50 @@ Or install it yourself as:
 To initialize framework folder structure run:
 
     $ tune --init
+
+It creates a folder tree within your working directory:
+
+```
+lib
+├── groups
+├── pages
+└── steps
+```
+
+In your framework include the module:
+
+```ruby
+include TuneSpec::Instances
+```
+
+Then you can use TuneSpec DSL to store instances of your Groups, Steps and Page objects.
+Assume that you have LoginPage object and LoginSteps and LoginGroups:
+```ruby
+page(:login).fill_in 'Email', with: 'user@example.com'
+page(:login).fill_in 'Password', with: 'password'
+page(:login).login.click
+```
+
+Or in your LoginSteps you can describe steps as a a group of interactions and verifications on a page:
+```ruby
+steps(:login).visit_page
+steps(:login).login_with_valid_credentials
+steps(:login).verify_login
+```
+
+You can go further and organize your steps within a group when details don't matter
+```ruby
+groups(:login).complete
+```
+
+The default instantiation of each of your objects is configurable:
+```ruby
+TuneSpec.configure do |config|
+  config.page_opts = { env: ENV['TEST_ENV'] }
+  config.steps_opts = { env: ENV['TEST_ENV'], page: :home }
+  config.groups_opts = {}
+end
+```
 
 ## Development
 
