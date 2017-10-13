@@ -57,9 +57,9 @@ module TuneSpec
           end
         end
 
-        # A hook to implement additional rules by subclasses
-        def post_format_args(args)
-          args
+        # A hook to implement additional formatting by subclasses
+        def post_format_args(_args)
+          raise 'Implement a #post_format_args method'
         end
 
         def fetch_default_args
@@ -82,7 +82,11 @@ module TuneSpec
         end
 
         def load_files
-          @files ||= Dir.glob("#{TuneSpec.directory}/#{type}s/**/*")
+          @files ||= Dir.glob("#{folder_name}/**/*")
+        end
+
+        def folder_name
+          raise "Implement a #folder_name method for #{self}"
         end
       end
     end

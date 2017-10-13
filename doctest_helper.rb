@@ -8,16 +8,16 @@ TEST_ENV = 'STG'
 
 TuneSpec.configure do |conf|
   conf.directory = 'test'
-  conf.group_opts = { env: TEST_ENV }
+  conf.groups_opts = { env: TEST_ENV }
   conf.steps_opts = { env: TEST_ENV }
   conf.page_opts = { env: TEST_ENV }
 end
 
 def create_file(name, type)
-  FileUtils.mkdir_p("test/#{type}s")
-  File.open("test/#{type}s/#{name}_#{type}.rb", 'w+') do |file|
-    file << file_content(name, type)
-  end
+  folder_name = type == :page ? 'pages' : type.to_s
+  file_name = "test/#{folder_name}/#{name}_#{type}.rb"
+  FileUtils.mkdir_p("test/#{folder_name}")
+  File.open(file_name, 'w+') { |f| f << file_content(name, type) }
 end
 
 def file_content(name, type)
@@ -27,7 +27,7 @@ def file_content(name, type)
 
     klass.class_eval do
       case "#{type}"
-      when 'group'
+      when 'groups'
         define_method('initialize') do |env|; end
         define_method('complete') do; end
       when 'steps'
@@ -41,14 +41,12 @@ def file_content(name, type)
   FILE
 end
 
-YARD::Doctest.configure do |doctest|
-  doctest.before('TuneSpec::Instances') do
-    create_file(:login, :group)
-    create_file(:calculator, :steps)
-    create_file(:home, :page)
-  end
+create_file(:login, :groups)
+create_file(:calculator, :steps)
+create_file(:home, :page)
 
-  doctest.after('TuneSpec::Instances') do
+YARD::Doctest.configure do |doctest|
+  doctest.after_run do
     FileUtils.rm_rf('test')
   end
 end

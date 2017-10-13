@@ -9,11 +9,6 @@ module TuneSpec
       class << self
         private
 
-        # Step specific args format
-        def post_format_args(args)
-          args.tap { |arr| arr[1] = pages(args[1][:page]) }
-        end
-
         # Step specific rules
         def rules_passed?(instance, args)
           same_page?(instance, args[1])
@@ -29,6 +24,15 @@ module TuneSpec
 
         def general_steps?(instance)
           argument_required?(:page_object, instance.class)
+        end
+
+        # Step specific args format
+        def post_format_args(args)
+          args.tap { |arr| arr[1] = page(args[1][:page]) }
+        end
+
+        def folder_name
+          "#{TuneSpec.directory}/#{type}"
         end
       end
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'instances/group'
-require_relative 'instances/step'
+require_relative 'instances/groups'
+require_relative 'instances/steps'
 require_relative 'instances/page'
 
 module TuneSpec
@@ -15,9 +15,9 @@ module TuneSpec
     # @param block [Block] that yields to self
     # @return [GroupObject]
     # @example
-    #   group(:login).complete
-    def group(name, *args, &block)
-      instance_handler(name, :group, *args, block)
+    #   groups(:login).complete
+    def groups(name, *args, &block)
+      instance_handler(name, :groups, *args, block)
     end
 
     # Creates an instance of Step or calls an existing
@@ -39,8 +39,8 @@ module TuneSpec
     # @param block [Block] that yields to self
     # @return [PageObject]
     # @example
-    #   pages(:home).click_element
-    def pages(name, *args, &block)
+    #   page(:home).click_element
+    def page(name, *args, &block)
       instance_handler(name, :page, *args, block)
     end
 

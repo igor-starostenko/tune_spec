@@ -13,6 +13,15 @@ module TuneSpec
         def rules_passed?(instance, _args)
           instance
         end
+
+        # Additional formatting of args
+        def post_format_args(args)
+          args
+        end
+
+        def folder_name
+          "#{TuneSpec.directory}/#{type}s"
+        end
       end
     end
   end
