@@ -11,7 +11,7 @@ module TuneSpec
 
         # Step specific rules
         def rules_passed?(instance, args)
-          same_page?(instance, args[1])
+          same_page?(instance, args[1]) if args
         end
 
         # Verifies if the step requires a page_object
@@ -28,7 +28,8 @@ module TuneSpec
 
         # Step specific args format
         def post_format_args(args)
-          args.tap { |arr| arr[1] = page(args[1][:page]) }
+          return args if args.empty? || !args[1]
+          args.tap { |arr| arr[1] = page(arr[1][:page]) }
         end
 
         def file_directory
