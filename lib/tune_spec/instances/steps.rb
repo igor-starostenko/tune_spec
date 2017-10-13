@@ -31,7 +31,7 @@ module TuneSpec
           args.tap { |arr| arr[1] = page(args[1][:page]) }
         end
 
-        def folder_name
+        def file_directory
           "#{TuneSpec.directory}/#{type}"
         end
       end

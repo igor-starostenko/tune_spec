@@ -19,7 +19,7 @@ module TuneSpec
           args
         end
 
-        def folder_name
+        def file_directory
           "#{TuneSpec.directory}/#{type}"
         end
       end

@@ -40,7 +40,7 @@ module TuneSpec
 
         # A hook to define rules by subclasses
         def rules_passed?(_instance, _args)
-          raise 'Implement a #rules_passed? method'
+          raise "Implement a #rules_passed? method for #{self}"
         end
 
         def prepare_args(args, object_class)
@@ -59,7 +59,7 @@ module TuneSpec
 
         # A hook to implement additional formatting by subclasses
         def post_format_args(_args)
-          raise 'Implement a #post_format_args method'
+          raise "Implement a #post_format_args method for #{self}"
         end
 
         def fetch_default_args
@@ -82,10 +82,11 @@ module TuneSpec
         end
 
         def load_files
-          @files ||= Dir.glob("#{folder_name}/**/*")
+          @files ||= Dir.glob("#{file_directory}/**/*")
         end
 
-        def folder_name
+        # A hook to implement folder name by subclass
+        def file_directory
           raise "Implement a #folder_name method for #{self}"
         end
       end
