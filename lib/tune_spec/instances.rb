@@ -39,8 +39,8 @@ module TuneSpec
     # @param block [Block] that yields to self
     # @return [PageObject]
     # @example
-    #   page(:home).click_element
-    def page(name, *args, &block)
+    #   pages(:home).click_element
+    def pages(name, *args, &block)
       instance_handler(name, :page, *args, block)
     end
 
