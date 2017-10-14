@@ -7,12 +7,12 @@ module TuneSpec
     # Defines the group behavior and rules
     class Groups < Tuner
       class << self
-        private
-
-        # Group specific rules
+        # Groups specific rules
         def rules_passed?(instance, _args)
           instance
         end
+
+        private
 
         def file_directory
           "#{TuneSpec.directory}/#{type}"
