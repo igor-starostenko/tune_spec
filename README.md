@@ -42,9 +42,9 @@ include TuneSpec::Instances
 Then you can use TuneSpec DSL to store instances of your Groups, Steps and Page objects.
 Assume that you have LoginPage object and LoginSteps and LoginGroups:
 ```ruby
-page(:login).fill_in 'Email', with: 'user@example.com'
-page(:login).fill_in 'Password', with: 'password'
-page(:login).login.click
+pages(:login).fill_in 'Email', with: 'user@example.com'
+pages(:login).fill_in 'Password', with: 'password'
+pages(:login).login.click
 ```
 
 Or in your LoginSteps you can describe steps as a a group of interactions and verifications on a page:
