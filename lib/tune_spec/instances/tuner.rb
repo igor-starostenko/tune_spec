@@ -4,38 +4,9 @@ module TuneSpec
   module Instances
     # Abstract class for Group, Step and Page
     class Tuner
-      def self.create_instance_method(name)
-        method_name = instance_method_name(name)
-        return if respond_to?(method_name)
-        define_singleton_method(method_name) do |*args|
-          var_name = instance_variable_name(name)
-          instance_var = instance_variable_get(var_name)
-          return instance_var if rules_passed?(instance_var, args)
-          new_instance = call_object(method_name).new(*args)
-          instance_variable_set(var_name, new_instance)
-        end
-      end
-
-      def self.call_instance_method(name, *args, block)
-        method_name = instance_method_name(name)
-        formatted_args = format_args(args, call_object(method_name))
-        return __send__(method_name, *formatted_args) unless block
-        __send__(method_name, *formatted_args).instance_eval(&block)
-      end
-
       class << self
-        private
-
-        def instance_variable_name(name)
-          "@#{instance_method_name(name)}"
-        end
-
         def instance_method_name(name)
           "#{name}_#{type}".downcase
-        end
-
-        def type
-          @type ||= itself.to_s.split('::').last.downcase
         end
 
         # A hook to define rules by subclasses
@@ -43,13 +14,25 @@ module TuneSpec
           raise "Implement a #rules_passed? method for #{self}"
         end
 
-        def format_args(args, object_class)
+        def format_args(args, object_klass)
           default_args = fetch_default_args
           args.tap do |arr|
             default_args.each do |key, value|
-              arr.insert(0, value) if argument_required?(key, object_class)
+              arr.insert(0, value) if argument_required?(key, object_klass)
             end
           end
+        end
+
+        def call_object(file_name)
+          ensure_required(file_name)
+          const_name = file_name.split('_').each(&:capitalize!).join('')
+          const_get(const_name)
+        end
+
+        private
+
+        def type
+          @type ||= itself.to_s.split('::').last.downcase
         end
 
         def fetch_default_args
@@ -58,12 +41,6 @@ module TuneSpec
 
         def argument_required?(arg, klass)
           klass.instance_method(:initialize).parameters.flatten.include?(arg)
-        end
-
-        def call_object(file_name)
-          ensure_required(file_name)
-          const_name = file_name.split('_').each(&:capitalize!).join('')
-          const_get(const_name)
         end
 
         def ensure_required(name)
