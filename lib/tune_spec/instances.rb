@@ -48,7 +48,7 @@ module TuneSpec
 
     # @private
     def instance_handler(name, type, *args, block)
-      type_helper = const_get(type.capitalize)
+      type_helper = eval(type.to_s.capitalize)
       type_helper.create_instance_method(name)
       type_helper.call_instance_method(name, *args, block)
     end
