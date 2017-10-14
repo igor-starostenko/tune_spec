@@ -28,7 +28,8 @@ module TuneSpec
     # @return [StepObject]
     # @example
     #   steps(:calculator, page: :home).verify_result
-    def steps(name, *args, &block)
+    def steps(name, *args, page: nil, &block)
+      args.insert(0, pages(page)) if page
       instance_handler(name, Steps, *args, block)
     end
 

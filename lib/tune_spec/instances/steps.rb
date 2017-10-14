@@ -26,12 +26,6 @@ module TuneSpec
           argument_required?(:page_object, instance.class)
         end
 
-        # Step specific args format
-        def post_format_args(args)
-          return args if args.empty? || !args[1]
-          args.tap { |arr| arr[1] = pages(arr[1][:page]) }
-        end
-
         def file_directory
           "#{TuneSpec.directory}/#{type}"
         end

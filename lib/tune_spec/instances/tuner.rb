@@ -18,7 +18,7 @@ module TuneSpec
 
       def self.call_instance_method(name, *args, block)
         method_name = instance_method_name(name)
-        formatted_args = prepare_args(args, call_object(method_name))
+        formatted_args = format_args(args, call_object(method_name))
         return __send__(method_name, *formatted_args) unless block
         __send__(method_name, *formatted_args).instance_eval(&block)
       end
@@ -43,11 +43,6 @@ module TuneSpec
           raise "Implement a #rules_passed? method for #{self}"
         end
 
-        def prepare_args(args, object_class)
-          preformatted_args = format_args(args, object_class)
-          post_format_args(preformatted_args)
-        end
-
         def format_args(args, object_class)
           default_args = fetch_default_args
           args.tap do |arr|
@@ -55,11 +50,6 @@ module TuneSpec
               arr.insert(0, value) if argument_required?(key, object_class)
             end
           end
-        end
-
-        # A hook to implement additional formatting by subclasses
-        def post_format_args(_args)
-          raise "Implement a #post_format_args method for #{self}"
         end
 
         def fetch_default_args

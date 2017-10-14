@@ -14,11 +14,6 @@ module TuneSpec
           instance
         end
 
-        # Additional formatting of args
-        def post_format_args(args)
-          args
-        end
-
         def file_directory
           "#{TuneSpec.directory}/#{type}s"
         end
