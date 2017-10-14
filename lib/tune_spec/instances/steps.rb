@@ -29,7 +29,7 @@ module TuneSpec
         # Step specific args format
         def post_format_args(args)
           return args if args.empty? || !args[1]
-          args.tap { |arr| arr[1] = page(arr[1][:page]) }
+          args.tap { |arr| arr[1] = pages(arr[1][:page]) }
         end
 
         def file_directory
