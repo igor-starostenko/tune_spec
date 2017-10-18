@@ -17,17 +17,21 @@ module TuneSpec
         # Verifies if the step requires a page_object
         def same_page?(instance, page)
           return false unless instance
-          return true unless instance.respond_to?(:page_object)
+          return true unless instance.respond_to?(page_arg)
           return true unless general_steps?(instance)
           page.instance_of?(instance.page_object.class)
         end
 
         def general_steps?(instance)
-          argument_required?(:page_object, instance.class)
+          argument_required?(page_arg, instance.class)
         end
 
         def file_directory
           "#{TuneSpec.directory}/#{type}"
+        end
+
+        def page_arg
+          TuneSpec.steps_page_arg
         end
       end
     end
