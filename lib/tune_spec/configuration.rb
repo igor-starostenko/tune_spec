@@ -8,7 +8,7 @@ module TuneSpec
 
     DEFAULT_DIRECTORY = 'lib'
 
-    DEFAULT_STEPS_PAGE_ARG = :page_object
+    DEFAULT_STEPS_PAGE_ARG = :page
 
     DEFAULT_PAGE_OPTS = {}.freeze
 
