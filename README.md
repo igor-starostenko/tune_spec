@@ -54,6 +54,16 @@ steps(:login).login_with_valid_credentials
 steps(:login).verify_login
 ```
 
+If you have steps class not associated with a particular page you may want to use dependency injection:
+```ruby
+steps(:header, page: :home).verify_menu
+```
+In this case it creates a `#header_steps` method that stores an instance of `HeaderSteps` and a `#home_page` method with an instance of `HomePage` as a page object of `HeaderSteps`. Next time you call this step it will return the same instance unless you change the page object associated with it.
+Page initialization argument is set to `:page` by default. Can be changed with:
+```ruby
+TuneSpec.steps_page_arg = :page
+```
+
 You can go further and organize your steps within a group when details don't matter
 ```ruby
 groups(:login).complete

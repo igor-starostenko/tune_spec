@@ -8,6 +8,7 @@ TEST_ENV = 'STG'
 
 TuneSpec.configure do |conf|
   conf.directory = 'test'
+  conf.steps_page_arg = :page_object
   conf.groups_opts = { env: TEST_ENV }
   conf.steps_opts = { env: TEST_ENV }
   conf.page_opts = { env: TEST_ENV }
