@@ -5,7 +5,7 @@ module TuneSpec
   module Configuration
     VALID_CONFIG_KEYS = %i[directory steps_page_arg
                            page_opts steps_opts groups_opts
-                           calabash_enabled calabash_timeout].freeze
+                           calabash_enabled calabash_wait_opts].freeze
 
     DEFAULT_DIRECTORY = 'lib'
 
@@ -19,7 +19,7 @@ module TuneSpec
 
     DEFAULT_CALABASH_ENABLED = false
 
-    DEFAULT_CALABASH_TIMEOUT = 10
+    DEFAULT_CALABASH_WAIT_OPTS = { timeout: 10 }
 
     VALID_CONFIG_KEYS.each { |key| attr_accessor key }
 

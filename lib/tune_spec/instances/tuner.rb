@@ -29,6 +29,10 @@ module TuneSpec
           const_get(const_name)
         end
 
+        def create_instance(file_name, *args)
+          call_object(file_name).new(*args)
+        end
+
         private
 
         def type
