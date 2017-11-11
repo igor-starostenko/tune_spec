@@ -19,7 +19,7 @@ module TuneSpec
 
     DEFAULT_CALABASH_ENABLED = false
 
-    DEFAULT_CALABASH_WAIT_OPTS = { timeout: 10 }
+    DEFAULT_CALABASH_WAIT_OPTS = { timeout: 10 }.freeze
 
     VALID_CONFIG_KEYS.each { |key| attr_accessor key }
 

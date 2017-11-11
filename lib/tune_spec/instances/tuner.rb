@@ -29,8 +29,8 @@ module TuneSpec
           const_get(const_name)
         end
 
-        def create_instance(file_name, *args)
-          call_object(file_name).new(*args)
+        def object_type
+          :common
         end
 
         private
