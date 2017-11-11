@@ -12,6 +12,11 @@ module TuneSpec
           instance
         end
 
+        def object_type
+          return super unless TuneSpec.calabash_enabled
+          :calabash_page
+        end
+
         private
 
         def file_directory

@@ -29,6 +29,10 @@ module TuneSpec
           const_get(const_name)
         end
 
+        def object_type
+          :common
+        end
+
         private
 
         def type
