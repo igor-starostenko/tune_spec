@@ -69,19 +69,9 @@ module TuneSpec
 
     # @private
     def create_instance(klass, instance_klass, args)
-      type = klass.object_type
-      __send__("create_#{type}_instance", instance_klass, args)
-    end
-
-    # @private
-    def create_common_instance(object, args)
-      object.new(*args)
-    end
-
-    # @private
-    def create_calabash_page_instance(object, args)
+      return instance_klass.new(*args) if klass.object_type == :common
       wait_opts = TuneSpec.calabash_wait_opts
-      page(object, *args).await(wait_opts)
+      page(instance_klass, *args).await(wait_opts)
     end
 
     # @private
