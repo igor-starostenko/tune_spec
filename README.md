@@ -78,6 +78,16 @@ TuneSpec.configure do |config|
 end
 ```
 
+### Calabash
+
+In order to use the gem with calabash page instantiation features you need to set `TuneSpec.calabash_enabled = true`. Or configure the gem:
+```ruby
+TuneSpec.configure do |config|
+  config.calabash_enabled = true
+  config.calabash_wait_opts = { timeout: 10 } # set by default
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
