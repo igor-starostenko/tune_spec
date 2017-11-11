@@ -4,7 +4,8 @@ module TuneSpec
   # Defines all configurable attributes of TuneSpec
   module Configuration
     VALID_CONFIG_KEYS = %i[directory steps_page_arg
-                           page_opts steps_opts groups_opts].freeze
+                           page_opts steps_opts groups_opts
+                           calabash_enabled calabash_timeout].freeze
 
     DEFAULT_DIRECTORY = 'lib'
 
@@ -15,6 +16,10 @@ module TuneSpec
     DEFAULT_STEPS_OPTS = {}.freeze
 
     DEFAULT_GROUPS_OPTS = {}.freeze
+
+    DEFAULT_CALABASH_ENABLED = false
+
+    DEFAULT_CALABASH_TIMEOUT = 10
 
     VALID_CONFIG_KEYS.each { |key| attr_accessor key }
 
