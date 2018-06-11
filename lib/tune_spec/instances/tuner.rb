@@ -10,15 +10,15 @@ module TuneSpec
         end
 
         # A hook to define rules by subclasses
-        def rules_passed?(_instance, _args)
+        def rules_passed?(_instance, _opts = {})
           raise "Implement a #rules_passed? method for #{self}"
         end
 
-        def format_args(args, object_klass)
-          default_args = fetch_default_args
-          args.tap do |arr|
-            default_args.each do |key, value|
-              arr.insert(0, value) if argument_required?(key, object_klass)
+        def format_opts(opts, instance_klass)
+          default_opts = fetch_default_opts
+          pre_format_opts(opts).tap do |hash|
+            default_opts.each do |key, value|
+              hash[key] = value if argument_required?(key, instance_klass)
             end
           end
         end
@@ -39,7 +39,7 @@ module TuneSpec
           @type ||= itself.to_s.split('::').last.downcase
         end
 
-        def fetch_default_args
+        def fetch_default_opts
           TuneSpec.__send__("#{type}_opts".downcase)
         end
 
@@ -48,17 +48,21 @@ module TuneSpec
         end
 
         def ensure_required(name)
-          path = load_files.detect { |f| f.include?("/#{name}.rb") }
+          path = project_files.detect { |f| f.include?("/#{name}.rb") }
           path ? require("./#{path}") : raise("Unable to find #{name}.rb")
         end
 
-        def load_files
-          @files ||= Dir.glob("#{file_directory}/**/*")
+        def project_files
+          @project_files ||= Dir.glob("#{file_directory}/**/*")
         end
 
         # A hook to implement folder name by subclass
         def file_directory
           raise "Implement a #folder_name method for #{self}"
+        end
+
+        def pre_format_opts(opts)
+          opts
         end
       end
     end

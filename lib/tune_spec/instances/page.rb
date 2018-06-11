@@ -8,7 +8,7 @@ module TuneSpec
     class Page < Tuner
       class << self
         # Page specific rules
-        def rules_passed?(instance, _args)
+        def rules_passed?(instance, _opts)
           instance
         end
 

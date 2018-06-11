@@ -8,7 +8,7 @@ module TuneSpec
     class Groups < Tuner
       class << self
         # Groups specific rules
-        def rules_passed?(instance, _args)
+        def rules_passed?(instance, _opts)
           instance
         end
 
