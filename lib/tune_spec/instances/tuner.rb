@@ -14,11 +14,11 @@ module TuneSpec
           raise "Implement a #rules_passed? method for #{self}"
         end
 
-        def format_opts(opts, object_klass)
+        def format_opts(opts, instance_klass)
           default_opts = fetch_default_opts
           pre_format_opts(opts).tap do |hash|
             default_opts.each do |key, value|
-              hash[key] = value if argument_required?(key, object_klass)
+              hash[key] = value if argument_required?(key, instance_klass)
             end
           end
         end

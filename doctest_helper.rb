@@ -29,7 +29,7 @@ def file_content(name, type)
     klass.class_eval do
       case "#{type}"
       when 'groups'
-        define_method('initialize') do |env:, aut:|; end
+        define_method('initialize') do |test, env:, aut:|; end
         define_method('complete') do; end
       when 'steps'
         define_method('initialize') do |env:, page_object:|; end
