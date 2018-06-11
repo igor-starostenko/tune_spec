@@ -1,6 +1,8 @@
 language: ruby
-  rvm:
-    - 2.4.1
-  script:
-    - bundle exec rubocop
-    - bundle exec yard doctest
+rvm:
+  - 2.4.1
+before_script:
+  - bundle exec yard config load_plugins true
+script:
+  - bundle exec rubocop
+  - bundle exec yard doctest
