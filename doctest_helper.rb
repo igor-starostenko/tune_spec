@@ -3,7 +3,7 @@
 require 'tune_spec'
 require 'fileutils'
 
-include TuneSpec::Instances
+include TuneSpec::Instances # rubocop:disable Style/MixinUsage
 TEST_ENV = 'STG'
 
 TuneSpec.configure do |conf|

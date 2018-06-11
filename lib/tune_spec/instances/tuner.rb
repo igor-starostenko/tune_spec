@@ -48,12 +48,12 @@ module TuneSpec
         end
 
         def ensure_required(name)
-          path = load_files.detect { |f| f.include?("/#{name}.rb") }
+          path = project_files.detect { |f| f.include?("/#{name}.rb") }
           path ? require("./#{path}") : raise("Unable to find #{name}.rb")
         end
 
-        def load_files
-          @files ||= Dir.glob("#{file_directory}/**/*")
+        def project_files
+          @project_files ||= Dir.glob("#{file_directory}/**/*")
         end
 
         # A hook to implement folder name by subclass

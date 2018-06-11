@@ -40,6 +40,7 @@ module TuneSpec
         end
       end
     end
+    # rubocop:enable MethodLength
 
     private
 
