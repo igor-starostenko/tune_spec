@@ -11,7 +11,8 @@ module TuneSpec
     # Creates an instance of Group or calls an existing
     #
     # @param name [Symbol, String] the prefix of the Groups object class
-    # @param opts [Hash] additional optional arguments
+    # @param opts [Hash] optional arguments
+    # @param args [Any] extra arguments
     # @param block [Block] that yields to self
     # @return [GroupObject]
     # @example
@@ -23,7 +24,8 @@ module TuneSpec
     # Creates an instance of Step or calls an existing
     #
     # @param name [Symbol, String] the prefix of the Step object class
-    # @param opts [Hash] additional optional arguments
+    # @param opts [Hash] optional arguments
+    # @param args [Any] extra arguments
     # @param block [Block] that yields to self
     # @return [StepObject]
     # @example
@@ -35,7 +37,8 @@ module TuneSpec
     # Creates an instance of Page or calls an existing
     #
     # @param name [Symbol, String] the prefix of the Page object class
-    # @param opts [Hash] additional optional arguments
+    # @param opts [Hash] optional arguments
+    # @param args [Any] extra arguments
     # @param block [Block] that yields to self
     # @return [PageObject]
     # @example
