@@ -33,11 +33,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.15)
+  bundler (~> 1.16.2)
   rubocop (~> 0.50.0)
   tune_spec!
   yard (~> 0.9.12)
   yard-doctest (~> 0.1.10)
 
 BUNDLED WITH
-   1.16.0.pre.3
+   1.16.2
