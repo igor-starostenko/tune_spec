@@ -8,8 +8,8 @@ module TuneSpec
     class Steps < Tuner
       class << self
         # Steps specific rules
-        def rules_passed?(instance, args)
-          same_page?(instance, args[1]) if args
+        def rules_passed?(instance, opts = {})
+          same_page?(instance, opts[:page]) unless opts.empty?
         end
 
         private
@@ -32,6 +32,11 @@ module TuneSpec
 
         def page_arg
           TuneSpec.steps_page_arg
+        end
+
+        def pre_format_opts(opts)
+          return opts unless opts.key?(:page)
+          opts.tap { |hash| hash[page_arg] = hash.delete(:page) }
         end
       end
     end

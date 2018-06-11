@@ -3,13 +3,13 @@
 require 'tune_spec'
 require 'fileutils'
 
-include TuneSpec::Instances # rubocop:disable Style/MixinUsage
+include TuneSpec::Instances
 TEST_ENV = 'STG'
 
 TuneSpec.configure do |conf|
   conf.directory = 'test'
   conf.steps_page_arg = :page_object
-  conf.groups_opts = { env: TEST_ENV }
+  conf.groups_opts = { env: TEST_ENV, aut: 'WEB' }
   conf.steps_opts = { env: TEST_ENV }
   conf.page_opts = { env: TEST_ENV }
 end
@@ -29,13 +29,13 @@ def file_content(name, type)
     klass.class_eval do
       case "#{type}"
       when 'groups'
-        define_method('initialize') do |env|; end
+        define_method('initialize') do |env:, aut:|; end
         define_method('complete') do; end
       when 'steps'
-        define_method('initialize') do |env, page_object|; end
+        define_method('initialize') do |env:, page_object:|; end
         define_method('verify_result') do; end
       when 'page'
-        define_method('initialize') do |env|; end
+        define_method('initialize') do |env:|; end
         define_method('click_element') do; end
       end
     end
