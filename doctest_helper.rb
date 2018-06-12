@@ -32,8 +32,13 @@ def file_content(name, type)
         define_method('initialize') do |test, env:, aut:|; end
         define_method('complete') do; end
       when 'steps'
-        define_method('initialize') do |env:, page_object:|; end
-        define_method('verify_result') do; end
+        define_method('initialize') do |env:, page_object:|
+          @env = env
+          @page_object = page_object
+        end
+        define_method('verify_result') do
+          @page_object.click_element
+        end
       when 'page'
         define_method('initialize') do |env:|; end
         define_method('click_element') do; end
