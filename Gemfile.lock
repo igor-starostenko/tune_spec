@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tune_spec (0.5.0)
+    tune_spec (0.5.3)
 
 GEM
   remote: https://rubygems.org/
@@ -33,7 +33,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16.2)
+  bundler (~> 1.16, >= 1.16.2)
   rubocop (~> 0.50.0)
   tune_spec!
   yard (~> 0.9.12)
