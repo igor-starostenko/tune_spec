@@ -9,8 +9,8 @@ module TuneSpec
       class << self
         # Steps specific rules
         def rules_passed?(instance, opts = {})
-          return nil if opts.nil?
-          same_page?(instance, opts[:page]) unless opts.empty?
+          return false if opts.nil?
+          same_page?(instance, opts[page_arg]) unless opts.empty?
         end
 
         private
@@ -20,7 +20,8 @@ module TuneSpec
           return false unless instance
           return true unless instance.respond_to?(page_arg)
           return true unless general_steps?(instance)
-          page.instance_of?(instance.page_object.class)
+          return true if page.nil?
+          page.instance_of?(instance.__send__(page_arg).class)
         end
 
         def general_steps?(instance)
