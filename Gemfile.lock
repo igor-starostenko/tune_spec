@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tune_spec (0.5.1)
+    tune_spec (0.5.2)
 
 GEM
   remote: https://rubygems.org/
