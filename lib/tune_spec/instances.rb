@@ -55,7 +55,8 @@ module TuneSpec
       method_name = klass.instance_method_name(name)
       instance_klass = klass.call_object(method_name)
       create_instance_method(method_name, klass, instance_klass)
-      args << klass.format_opts(opts, instance_klass)
+      formatted_opts = klass.format_opts(opts, instance_klass)
+      args << formatted_opts unless formatted_opts.empty?
       call_instance_method(method_name, *args, block)
     end
 

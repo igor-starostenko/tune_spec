@@ -9,6 +9,7 @@ module TuneSpec
       class << self
         # Steps specific rules
         def rules_passed?(instance, opts = {})
+          return nil if opts.nil?
           same_page?(instance, opts[:page]) unless opts.empty?
         end
 
