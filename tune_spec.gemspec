@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.16', '>= 1.16.2'
-  spec.add_development_dependency 'rubocop', '~> 0.50.0'
+  spec.add_development_dependency 'rubocop', '~> 0.63.1'
   spec.add_development_dependency 'yard', '~> 0.9.12'
   spec.add_development_dependency 'yard-doctest', '~> 0.1.10'
 end
