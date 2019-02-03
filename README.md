@@ -1,6 +1,11 @@
 # TuneSpec
 
-Organizes large scale integration tests following Convention over Configuration paradigm.
+[![Gem Version](https://badge.fury.io/rb/tune_spec.svg)](https://badge.fury.io/rb/tune_spec)
+[![Build Status](https://travis-ci.com/igor-starostenko/tune_spec.svg?branch=master)](https://travis-ci.com/igor-starostenko/tune_spec)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6d924fbd83bf675facf3/maintainability)](https://codeclimate.com/github/igor-starostenko/tune_spec/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/6d924fbd83bf675facf3/test_coverage)](https://codeclimate.com/github/igor-starostenko/tune_spec/test_coverage)
+
+Provides an easy to use DSL for Page Object model. Helps to organize large scale integration tests by following Convention over Configuration paradigm.
 
 ## Installation
 

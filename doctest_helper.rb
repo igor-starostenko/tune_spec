@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
-require 'tune_spec'
 require 'fileutils'
+require 'simplecov'
+require 'tune_spec'
+
+SimpleCov.start
 
 TEST_ENV = 'STG'
+DIRECTORY = 'test'
 include TuneSpec::Instances # rubocop:disable Style/MixinUsage
 
 # Dynamically generates test files
 module DoctestHelper
-  DIRECTORY = 'test'
-
   def self.create_file(name, type, &block)
     folder_name = type == :page ? 'pages' : type.to_s
     file_name = "#{DIRECTORY}/#{folder_name}/#{name}_#{type}.rb"
@@ -19,7 +21,7 @@ module DoctestHelper
 end
 
 TuneSpec.configure do |conf|
-  conf.directory = DoctestHelper::DIRECTORY
+  conf.directory = DIRECTORY
   conf.steps_page_arg = :page_object
   conf.groups_opts = { env: TEST_ENV, aut: 'WEB' }
   conf.steps_opts = { env: TEST_ENV }
@@ -71,6 +73,6 @@ end
 
 YARD::Doctest.configure do |doctest|
   doctest.after_run do
-    FileUtils.rm_rf(DoctestHelper::DIRECTORY)
+    FileUtils.rm_rf(DIRECTORY)
   end
 end
