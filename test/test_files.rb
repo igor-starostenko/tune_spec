@@ -45,4 +45,3 @@ TestHelper.create_file(:home, :page) do
     end
   FILE
 end
-
