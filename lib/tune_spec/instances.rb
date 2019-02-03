@@ -29,7 +29,7 @@ module TuneSpec
     # @param block [Block] that yields to self
     # @return [StepObject]
     # @example
-    #   steps(:calculator, page: :home).verify_result
+    #   steps(:calculator, page: :demo).verify_result
     def steps(name, opts = {}, *args, &block)
       opts[:page] && opts[:page] = pages(opts.fetch(:page))
       instance_handler(name, Steps, opts, *args, block)

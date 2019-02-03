@@ -8,37 +8,11 @@ include TuneSpec::Instances # rubocop:disable Style/MixinUsage
 
 # Dynamically generates test files
 module DoctestHelper
-  def self.create_file(name, type)
+  def self.create_file(name, type, &block)
     folder_name = type == :page ? 'pages' : type.to_s
     file_name = "test/#{folder_name}/#{name}_#{type}.rb"
     FileUtils.mkdir_p("test/#{folder_name}")
-    File.open(file_name, 'w+') { |f| f << file_content(name, type) }
-  end
-
-  def self.file_content(name, type)
-    <<~FILE
-      class_name = "#{name.capitalize}#{type.capitalize}"
-      klass = Object.const_set(class_name, Class.new)
-
-      klass.class_eval do
-        case "#{type}"
-        when 'groups'
-          define_method('initialize') do |test, env:, aut:|; end
-          define_method('complete') do; end
-        when 'steps'
-          define_method('initialize') do |env:, page_object:|
-            @env = env
-            @page_object = page_object
-          end
-          define_method('verify_result') do
-            @page_object.click_element
-          end
-        when 'page'
-          define_method('initialize') do |env:|; end
-          define_method('click_element') do; end
-        end
-      end
-    FILE
+    File.open(file_name, 'w+') { |f| f << block.call }
   end
 end
 
@@ -50,9 +24,48 @@ TuneSpec.configure do |conf|
   conf.page_opts = { env: TEST_ENV }
 end
 
-DoctestHelper.create_file(:login, :groups)
-DoctestHelper.create_file(:calculator, :steps)
-DoctestHelper.create_file(:home, :page)
+DoctestHelper.create_file(:login, :groups) do
+  <<-FILE
+    class LoginGroups
+      def initialize(test, env:, aut:); end
+      def complete; end
+    end
+  FILE
+end
+
+DoctestHelper.create_file(:calculator, :steps) do
+  <<-FILE
+    class CalculatorSteps
+      def initialize(env:, page_object:)
+        @env = env
+        @page_object = page_object
+      end
+      def verify_result
+        raise unless @page_object.title === 'ok'
+      end
+    end
+  FILE
+end
+
+DoctestHelper.create_file(:demo, :page) do
+  <<-FILE
+    class DemoPage
+      def initialize; end
+      def title
+        'ok'
+      end
+    end
+  FILE
+end
+
+DoctestHelper.create_file(:home, :page) do
+  <<-FILE
+    class HomePage
+      def initialize(env:); end
+      def click_element; end
+    end
+  FILE
+end
 
 YARD::Doctest.configure do |doctest|
   doctest.after_run do
