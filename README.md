@@ -1,6 +1,7 @@
 # TuneSpec
 
 [![Gem Version](https://badge.fury.io/rb/tune_spec.svg)](https://badge.fury.io/rb/tune_spec)
+[![Build Status](https://travis-ci.com/igor-starostenko/tune_spec.svg?branch=master)](https://travis-ci.com/igor-starostenko/tune_spec)
 
 Provides an easy to use DSL for Page Object model. Helps to organize large scale integration tests by following Convention over Configuration paradigm.
 
