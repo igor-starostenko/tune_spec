@@ -1,6 +1,7 @@
 .DS_Store
 *.gem
 .yardoc/
+coverage/
 doc/
 
 /tags
