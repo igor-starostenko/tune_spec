@@ -65,8 +65,10 @@ module TuneSpec
       return if respond_to?(method_name)
 
       define_singleton_method(method_name) do |*args|
-        instance_var = instance_variable_get("@#{method_name}")
-        return instance_var if klass.rules_passed?(instance_var, args.first)
+        if instance_variable_defined?("@#{method_name}")
+          instance_var = instance_variable_get("@#{method_name}")
+          return instance_var if klass.rules_passed?(instance_var, args.first)
+        end
 
         new_instance = create_instance(klass, instance_klass, *args)
         instance_variable_set("@#{method_name}", new_instance)

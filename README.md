@@ -3,7 +3,6 @@
 [![Gem Version](https://badge.fury.io/rb/tune_spec.svg)](https://badge.fury.io/rb/tune_spec)
 [![Build Status](https://travis-ci.com/igor-starostenko/tune_spec.svg?branch=master)](https://travis-ci.com/igor-starostenko/tune_spec)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6d924fbd83bf675facf3/maintainability)](https://codeclimate.com/github/igor-starostenko/tune_spec/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/6d924fbd83bf675facf3/test_coverage)](https://codeclimate.com/github/igor-starostenko/tune_spec/test_coverage)
 
 Provides an easy to use DSL for Page Object model. Helps to organize large scale integration tests by following Convention over Configuration paradigm.
 
@@ -38,10 +37,10 @@ lib
 └── steps
 ```
 
-In your framework include the module:
+Include the module in your framework:
 
 ```ruby
-include TuneSpec::Instances
+include TuneSpec
 ```
 
 Then you can use TuneSpec DSL to store instances of your Groups, Steps and Page objects.
@@ -98,6 +97,10 @@ end
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Testing
+
+To test documentation with [yard-doctest](https://github.com/p0deje/yard-doctest), run `bundle exec yard doctest`. For unit tests run `bundle exec rake test`.
 
 ## Contributing
 

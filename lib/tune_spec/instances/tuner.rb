@@ -49,7 +49,9 @@ module TuneSpec
 
         def ensure_required(name)
           path = project_files.detect { |f| f.include?("/#{name}.rb") }
-          path ? require("./#{path}") : raise("Unable to find #{name}.rb")
+          return require("./#{path}") if path
+
+          raise("Unable to find #{name}.rb in /#{TuneSpec.directory} directory")
         end
 
         def project_files

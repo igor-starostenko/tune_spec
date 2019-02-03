@@ -1,19 +1,11 @@
 language: ruby
 rvm:
   - 2.4.1
-env:
-  global:
-    - CC_TEST_REPORTER_ID=58f79d2c9386a1052fadcb50776e54d7bdd2098a21f4fd31f2e121108f94a4c6
 install:
   - gem uninstall bundler
   - gem install bundler --version '2.0.1'
   - bundle install
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 script:
   - bundle exec rubocop
-  - bundle exec rake yard:doctest
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - bundle exec yard doctest
+  - bundle exec rake test TESTOPTS='-v -p'

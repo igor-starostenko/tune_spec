@@ -1,0 +1,8 @@
+AllCops:
+  TargetRubyVersion: 2.4.1
+  Exclude:
+    - 'test_tmp/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**/*_test.rb'
