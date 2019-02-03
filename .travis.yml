@@ -16,6 +16,4 @@ script:
   - bundle exec rubocop
   - bundle exec rake yard:doctest
 after_script:
-  - ls
-  - ls coverage
-  - ./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

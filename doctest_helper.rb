@@ -4,8 +4,6 @@ require 'fileutils'
 require 'simplecov'
 require 'tune_spec'
 
-SimpleCov.start
-
 TEST_ENV = 'STG'
 DIRECTORY = 'test'
 include TuneSpec::Instances # rubocop:disable Style/MixinUsage
