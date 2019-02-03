@@ -1,6 +1,8 @@
 # TuneSpec
 
-Organizes large scale integration tests following Convention over Configuration paradigm.
+[![Gem Version](https://badge.fury.io/rb/tune_spec.svg)](https://badge.fury.io/rb/tune_spec)
+
+Provides an easy to use DSL for Page Object model. Helps to organize large scale integration tests by following Convention over Configuration paradigm.
 
 ## Installation
 
