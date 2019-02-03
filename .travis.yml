@@ -14,6 +14,6 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - bundle exec rubocop
-  - bundle exec rake yard:doctest
+  - bundle exec yard doctest
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
