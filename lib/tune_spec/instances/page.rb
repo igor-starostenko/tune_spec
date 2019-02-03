@@ -14,6 +14,7 @@ module TuneSpec
 
         def object_type
           return super unless TuneSpec.calabash_enabled
+
           :calabash_page
         end
 

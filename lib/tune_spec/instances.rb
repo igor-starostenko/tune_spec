@@ -29,7 +29,7 @@ module TuneSpec
     # @param block [Block] that yields to self
     # @return [StepObject]
     # @example
-    #   steps(:calculator, page: :home).verify_result
+    #   steps(:calculator, page: :demo).verify_result
     def steps(name, opts = {}, *args, &block)
       opts[:page] && opts[:page] = pages(opts.fetch(:page))
       instance_handler(name, Steps, opts, *args, block)
@@ -63,9 +63,11 @@ module TuneSpec
     # @private
     def create_instance_method(method_name, klass, instance_klass)
       return if respond_to?(method_name)
+
       define_singleton_method(method_name) do |*args|
         instance_var = instance_variable_get("@#{method_name}")
         return instance_var if klass.rules_passed?(instance_var, args.first)
+
         new_instance = create_instance(klass, instance_klass, *args)
         instance_variable_set("@#{method_name}", new_instance)
       end
@@ -74,6 +76,7 @@ module TuneSpec
     # @private
     def create_instance(klass, instance_klass, *args)
       return instance_klass.new(*args) if klass.object_type == :common
+
       wait_opts = TuneSpec.calabash_wait_opts
       page(instance_klass, *args).await(wait_opts)
     end
@@ -81,6 +84,7 @@ module TuneSpec
     # @private
     def call_instance_method(method_name, *args, block)
       return __send__(method_name, *args) unless block
+
       __send__(method_name, *args).instance_eval(&block)
     end
   end

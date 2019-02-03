@@ -3,56 +3,74 @@
 require 'tune_spec'
 require 'fileutils'
 
-include TuneSpec::Instances
 TEST_ENV = 'STG'
+include TuneSpec::Instances # rubocop:disable Style/MixinUsage
+
+# Dynamically generates test files
+module DoctestHelper
+  DIRECTORY = 'test'
+
+  def self.create_file(name, type, &block)
+    folder_name = type == :page ? 'pages' : type.to_s
+    file_name = "#{DIRECTORY}/#{folder_name}/#{name}_#{type}.rb"
+    FileUtils.mkdir_p("#{DIRECTORY}/#{folder_name}")
+    File.open(file_name, 'w+') { |f| f << block.call }
+  end
+end
 
 TuneSpec.configure do |conf|
-  conf.directory = 'test'
+  conf.directory = DoctestHelper::DIRECTORY
   conf.steps_page_arg = :page_object
   conf.groups_opts = { env: TEST_ENV, aut: 'WEB' }
   conf.steps_opts = { env: TEST_ENV }
   conf.page_opts = { env: TEST_ENV }
 end
 
-def create_file(name, type)
-  folder_name = type == :page ? 'pages' : type.to_s
-  file_name = "test/#{folder_name}/#{name}_#{type}.rb"
-  FileUtils.mkdir_p("test/#{folder_name}")
-  File.open(file_name, 'w+') { |f| f << file_content(name, type) }
+DoctestHelper.create_file(:login, :groups) do
+  <<-FILE
+    class LoginGroups
+      def initialize(test, env:, aut:); end
+      def complete; end
+    end
+  FILE
 end
 
-def file_content(name, type)
-  <<~FILE
-    class_name = "#{name.capitalize}#{type.capitalize}"
-    klass = Object.const_set(class_name, Class.new)
-
-    klass.class_eval do
-      case "#{type}"
-      when 'groups'
-        define_method('initialize') do |test, env:, aut:|; end
-        define_method('complete') do; end
-      when 'steps'
-        define_method('initialize') do |env:, page_object:|
-          @env = env
-          @page_object = page_object
-        end
-        define_method('verify_result') do
-          @page_object.click_element
-        end
-      when 'page'
-        define_method('initialize') do |env:|; end
-        define_method('click_element') do; end
+DoctestHelper.create_file(:calculator, :steps) do
+  <<-FILE
+    class CalculatorSteps
+      def initialize(env:, page_object:)
+        @env = env
+        @page_object = page_object
+      end
+      def verify_result
+        raise unless @page_object.title === 'ok'
       end
     end
   FILE
 end
 
-create_file(:login, :groups)
-create_file(:calculator, :steps)
-create_file(:home, :page)
+DoctestHelper.create_file(:demo, :page) do
+  <<-FILE
+    class DemoPage
+      def initialize; end
+      def title
+        'ok'
+      end
+    end
+  FILE
+end
+
+DoctestHelper.create_file(:home, :page) do
+  <<-FILE
+    class HomePage
+      def initialize(env:); end
+      def click_element; end
+    end
+  FILE
+end
 
 YARD::Doctest.configure do |doctest|
   doctest.after_run do
-    FileUtils.rm_rf('test')
+    FileUtils.rm_rf(DoctestHelper::DIRECTORY)
   end
 end

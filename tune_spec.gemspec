@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'tune_spec/version'
 
@@ -19,9 +19,10 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+  spec.metadata['yard.run'] = 'yri' # use "yard" to build full HTML docs.
 
-  spec.add_development_dependency 'bundler', '~> 1.16', '>= 1.16.2'
-  spec.add_development_dependency 'rubocop', '~> 0.50.0'
-  spec.add_development_dependency 'yard', '~> 0.9.12'
-  spec.add_development_dependency 'yard-doctest', '~> 0.1.10'
+  spec.add_development_dependency 'rake', '~> 12.3.2'
+  spec.add_development_dependency 'rubocop', '~> 0.63.1'
+  spec.add_development_dependency 'yard', '~> 0.9.18'
+  spec.add_development_dependency 'yard-doctest', '~> 0.1.13'
 end
