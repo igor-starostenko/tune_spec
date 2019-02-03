@@ -38,10 +38,10 @@ lib
 └── steps
 ```
 
-In your framework include the module:
+Include the module in your framework:
 
 ```ruby
-include TuneSpec::Instances
+include TuneSpec
 ```
 
 Then you can use TuneSpec DSL to store instances of your Groups, Steps and Page objects.
