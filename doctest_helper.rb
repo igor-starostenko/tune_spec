@@ -8,16 +8,18 @@ include TuneSpec::Instances # rubocop:disable Style/MixinUsage
 
 # Dynamically generates test files
 module DoctestHelper
+  DIRECTORY = 'test'
+
   def self.create_file(name, type, &block)
     folder_name = type == :page ? 'pages' : type.to_s
-    file_name = "test/#{folder_name}/#{name}_#{type}.rb"
-    FileUtils.mkdir_p("test/#{folder_name}")
+    file_name = "#{DIRECTORY}/#{folder_name}/#{name}_#{type}.rb"
+    FileUtils.mkdir_p("#{DIRECTORY}/#{folder_name}")
     File.open(file_name, 'w+') { |f| f << block.call }
   end
 end
 
 TuneSpec.configure do |conf|
-  conf.directory = 'test'
+  conf.directory = DoctestHelper::DIRECTORY
   conf.steps_page_arg = :page_object
   conf.groups_opts = { env: TEST_ENV, aut: 'WEB' }
   conf.steps_opts = { env: TEST_ENV }
@@ -69,6 +71,6 @@ end
 
 YARD::Doctest.configure do |doctest|
   doctest.after_run do
-    FileUtils.rm_rf('test')
+    FileUtils.rm_rf(DoctestHelper::DIRECTORY)
   end
 end
