@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'bundler/gem_tasks'
 require 'yard-doctest'
 
 task default: %w[yard:doctest]
