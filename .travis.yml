@@ -16,4 +16,6 @@ script:
   - bundle exec rubocop
   - bundle exec rake yard:doctest
 after_script:
-  - ./cc-test-reporter after-build --coverage-input-type simplecov -p /home/travis/build/igor-starostenko/tune_spec/coverage --exit-code $TRAVIS_TEST_RESULT
+  - ls
+  - ls coverage
+  - ./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
