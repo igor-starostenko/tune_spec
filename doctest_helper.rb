@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 require 'fileutils'
-require 'simplecov'
 require 'tune_spec'
 
 TEST_ENV = 'STG'
 DIRECTORY = 'test'
-include TuneSpec::Instances # rubocop:disable Style/MixinUsage
+include TuneSpec # rubocop:disable Style/MixinUsage
 
 # Dynamically generates test files
 module DoctestHelper
