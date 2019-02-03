@@ -13,8 +13,10 @@ TuneSpec.configure do |conf|
   conf.page_opts = { env: TEST_ENV }
 end
 
+TestHelper.setup_directory
+
 YARD::Doctest.configure do |doctest|
   doctest.after_run do
-    TestHelper.remove_test_directory
+    TestHelper.remove_directory
   end
 end

@@ -101,7 +101,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Testing
 
-To test documentation with [yard-doctest](https://github.com/p0deje/yard-doctest), run `bundle exec yard doctest`.
+To test documentation with [yard-doctest](https://github.com/p0deje/yard-doctest), run `bundle exec yard doctest`. For unit tests run `bundle exec rake test`.
 
 ## Contributing
 

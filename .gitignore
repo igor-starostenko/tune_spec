@@ -4,6 +4,8 @@
 coverage/
 doc/
 
+test_tmp/
+
 /tags
 *.swp
 *.vim
