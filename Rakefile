@@ -2,7 +2,7 @@
 
 require 'bundler/gem_tasks'
 require 'rake/testtask'
-require 'yard-doctest'
+require 'yard/doctest/rake'
 require_relative 'test/test_helper'
 
 namespace :test do
