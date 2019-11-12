@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.metadata['yard.run'] = 'yri' # use "yard" to build full HTML docs.
 
-  spec.add_development_dependency 'rake', '~> 12.3.2'
+  spec.add_development_dependency 'rake', '~> 13.0.1'
   spec.add_development_dependency 'rubocop', '~> 0.63.1'
   spec.add_development_dependency 'yard', '~> 0.9.18'
   spec.add_development_dependency 'yard-doctest', '~> 0.1.13'
