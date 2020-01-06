@@ -25,7 +25,7 @@ GEM
       unicode-display_width (~> 1.4.0)
     ruby-progressbar (1.10.0)
     unicode-display_width (1.4.1)
-    yard (0.9.18)
+    yard (0.9.23)
     yard-doctest (0.1.14)
       minitest
       yard
